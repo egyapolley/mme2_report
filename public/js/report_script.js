@@ -52,6 +52,32 @@ $(function () {
             throw err;
 
         })
+    });
+    
+    const downloadcsv = document.getElementById("downloadcsv");
+    
+    downloadcsv.addEventListener("click", function (event) {
+        const dataBtn = document.getElementById("generateChart");
+        let tablename =$(dataBtn).data("tablename");
+        let start_date =$(dataBtn).data("start_date");
+        let end_date =$(dataBtn).data("end_date");
+        let period =$(dataBtn).data("reporttype");
+        let reportname = $(dataBtn).data("reportname");
+
+        console.log(tablename,start_date,end_date,period,reportname);
+
+        $.post("/csv", {tablename, start_date, end_date, period,reportname})
+            .done(function (data) {
+                if (data){
+                    window.open("/csv?fileName="+data.fileName);
+                }
+
+            }).fail(function (err) {
+            throw err;
+
+        })
+
+        
     })
 
 })

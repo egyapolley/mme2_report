@@ -2,6 +2,9 @@ const express = require("express"),
     session = require('express-session'),
     path = require("path"),
     dbcon = require("./mysql"),
+    fs = require("fs"),
+    moment = require("moment"),
+    Parser = require("json2csv").Parser,
     exphbs = require("express-handlebars");
 
 
@@ -105,7 +108,7 @@ app.post("/report", (req, res) => {
         let dataSet = rows;
         let counter = Report[pm_counter];
         let reportname = counter;
-        let periodicity =period.charAt(0).toUpperCase()+period.substring(1);
+        let periodicity = period.charAt(0).toUpperCase() + period.substring(1);
         res.render("report", {
             dataSet,
             counter,
@@ -152,6 +155,63 @@ app.post("/charts", (req, res) => {
         res.json(rows);
     })
 
+});
+
+app.post("/csv", (req, res) => {
+
+    let {tablename, start_date, end_date, period, reportname} = req.body;
+    let tableName = tablename;
+    let query = "";
+    switch (period) {
+        case "hourly":
+            query = `select date_format( timeInserted, '%Y%m%d%H' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "daily":
+            query = `select date_format( timeInserted, '%Y%m%d' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "weekly":
+            query = `select date_format( timeInserted, '%x%v' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "monthly":
+            query = `select date_format( timeInserted, '%Y%m' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "yearly":
+            query = `select date_format( timeInserted, '%Y' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        default:
+            query = `select date_format( timeInserted, '%Y' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+
+    }
+    dbcon.execute(query, [start_date, end_date], function (error, rows) {
+        if (error) throw error;
+        const fields = ["my_date", "value"];
+        const parser = new Parser({fields});
+        let csv = parser.parse(rows);
+        reportname = reportname.replace(/\s/g, "_");
+        let fileName = moment().format("YYYYMMDDHHmmss-SSS") + "_" + reportname + ".csv"
+        let filepath = path.join(__dirname, "tmp", fileName);
+        fs.writeFile(filepath, csv, err => {
+            if (err) throw err;
+            res.json({fileName});
+        })
+
+
+    })
+
+
+});
+
+app.get("/csv", (req, res) => {
+    let fileName = req.query.fileName
+    let filepath = path.join(__dirname, "tmp", fileName);
+    res.download(filepath, fileName, err => {
+        if (err) throw err;
+        fs.unlink(filepath, err => {
+            if (err) throw err;
+            console.log("File " + fileName + " removed");
+        })
+
+    })
 })
 
 console.log(process.env.PROD_HOST)
