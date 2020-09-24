@@ -32,9 +32,13 @@ app.use(express.urlencoded({
     })
 )
 
+let HOST = process.env.PROD_HOST;
+
 
 if (process.env.NODE_ENV === "development") {
     app.use(require("morgan")("tiny"));
+
+    HOST = process.env.TEST_HOST;
 }
 
 const handlebars = exphbs.create({
@@ -79,8 +83,17 @@ app.post("/report", (req, res) => {
         if (error) throw error;
         let dataSet = rows;
         let counter = Report[pm_counter];
-        let reportname=counter;
-        res.render("report", {dataSet, counter, layout: "report_layout", start_date, end_date, tableName, period, reportname})
+        let reportname = counter;
+        res.render("report", {
+            dataSet,
+            counter,
+            layout: "report_layout",
+            start_date,
+            end_date,
+            tableName,
+            period,
+            reportname
+        })
 
     })
 });
@@ -99,8 +112,10 @@ app.post("/charts", (req, res) => {
 
 })
 
-app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV} at endpoint http://localhost:${PORT}`);
+console.log(process.env.PROD_HOST)
+
+app.listen(PORT, HOST, () => {
+    console.log(`Server running in ${process.env.NODE_ENV} at endpoint http://${HOST}:${PORT}`);
 })
 
 
