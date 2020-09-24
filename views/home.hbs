@@ -1,0 +1,94 @@
+<div class="home-main-container">
+    <div class="home-form-container">
+        <form action="/report" id="report-form" method="post">
+        <div class="home-form-control select-report">
+            <select class="select-css" id="select-report" required name="pm_counter">
+                <option value="">---- Select PM Indicator Counter -----</option>
+                <option value="NbrSuccessAttachRequests" >Number Of Success Attach Requests</option>
+                <option value="AttAttachRequests" >VS_UE_attach_req</option>
+                <option value="NbrAttachReqAbortBefore">VS_UE_attach_abort_BeforeAttachCmp</option>
+                <option value="NbrAttachReqAbortAfter">VS_UE_attach_abort_AfterAttachCmp</option>
+                <option value="NbrFailedAttachRequests_PLMNnotAllowed">VS_UE_attach_fail_rej_PLMNnotAllowed</option>
+                <option value="NbrFailedAttachRequests_EPSandNonEPSnotAllowed">VS_UE_attach_fail_rej_EPSandNonEPSnotAllowed</option>
+                <option value="NbrFailedAttachRequests_CannotDeriveUEid">VS_UE_attach_fail_rej_UEidCannotBeDerived</option>
+                <option value="NbrFailedAttachRequests_NetworkFailure">VS_UE_attach_fail_rej_NetworkFailure</option>
+            </select>
+        </div>
+            <div class="home-form-date">
+                <div class="home-date-fieldset">
+
+
+                        <div class="home-period-fieldset">
+                            <fieldset id="periodicity">
+                                <legend>Periodicity</legend>
+                                <div class="flex-group">
+                                    <div class="group-item">
+                                        <div class="home-form-control">
+                                            <ul >
+                                                <li><label><input type="radio" name="period" required value="hour">&nbsp;Hour</label></li>
+                                                <li><label><input type="radio" name="period" required value="day">&nbsp;Day</label></li>
+                                                <li><label><input type="radio" name="period" required value="week">&nbsp;Week</label></li>
+                                                <li><label><input type="radio" name="period" required value="month">&nbsp;Month</label></li>
+                                                <li><label><input type="radio" name="period" required value="year">&nbsp;Year</label></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="group-item">
+                                        <div class="home-form-control">
+                                            <ul >
+                                                <li><label>&frac14;Hour&nbsp;<input type="radio" name="period" required value="15mins"></label></li>
+                                                <li><label>&frac12;Hour&nbsp;<input type="radio" name="period" required value="30mins"></label></li>
+                                                <li><label>&frac34;Hour&nbsp;<input type="radio" name="period" required value="45mins"></label></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="group-item">
+                                        <div class="home-form-control">
+                                            <ul >
+                                                <li><label><input type="radio" name="period" required value="trendhrsDay">&nbsp;Trend on hours of day</label></li>
+                                                <li><label><input type="radio" name="period" required value="trendhrsWk">&nbsp;Trend on hours of week</label></li>
+                                                <li><label><input type="radio" name="period" required value="trenddaysWk">&nbsp;Trend on days of week</label></li>
+                                                <li><label><input type="radio" name="period" required value="trenddaysMon">&nbsp;Trend on days of month</label></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+
+                        <div class="home-date-select">
+                            <fieldset id="dateTime">
+                                <legend>Date/Time</legend>
+
+                                <div class="flex-group-date">
+                                    <div class="home-form-control">
+                                        <label >Begin Date: <input type="datetime-local" name="beginDate"  id="beginDate" required min="2020-09-01T00:00"></label>
+                                        <br>
+                                        <small class="error"><i class="fas fa-exclamation-triangle"></i>&nbsp;Invalid Begin Date (Should be less than End Date)</small>
+                                    </div>
+                                    <div class="home-form-control">
+                                        <label >End Date: <input type="datetime-local" id="endDate" name="endDate" required></label>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+
+
+
+                </div>
+
+            </div>
+            <div class="generateReport-btn">
+                <input type="submit" value="Generate Report" id="generateReport-btn">
+            </div>
+        </form>
+
+
+
+    </div>
+</div>

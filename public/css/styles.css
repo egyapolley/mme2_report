@@ -1,0 +1,276 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+ body {
+     font-family: sans-serif;
+     background: #03a9f4;
+}
+
+ .login-main-container {
+     width: 300px;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     color: white;
+
+ }
+
+
+
+ .login-container h1 {
+     font-size: 40px;
+     border-bottom: 6px solid #0c2131;
+     float: left;
+     display: none;
+     margin-bottom: 15px;
+     padding: 5px 0;
+ }
+ .clearfix {
+     clear: both;
+ }
+
+ .textbox {
+     width: 100%;
+     overflow: hidden;
+     font-size: 20px;
+     padding: 8px 0;
+     margin: 8px 0;
+     border-bottom: 1px solid #0c2131;
+
+ }
+
+ .textbox i {
+     width: 26px;
+     text-align: center;
+     float: left;
+ }
+
+ .textbox input {
+     border: none;
+     outline: none;
+     background: none;
+     color: white;
+     float: left;
+     width: 80%;
+     font-size: 18px;
+     margin: 0 10px;
+ }
+
+ .login-btn {
+     width: 100%;
+     background: #0c2131;
+     border: 2px solid #0c2131;
+     color: white;
+     font-size: 18px;
+     padding: 5px;
+     margin: 10px 0;
+     border-radius: 5px;
+ }
+
+ .login-btn:hover {
+     color: #0c2131;
+     background: white;
+ }
+
+ .login-btn:active{
+     background: transparent;
+ }
+
+
+ .home-main-container {
+     padding: 20px;
+ }
+
+ .select-report {
+     width: 600px;
+     margin: 30px auto;
+     overflow: hidden;
+     padding: 10px;
+
+
+ }
+ .select-report label {
+     color: #0c2131;
+     font-weight: bold;
+     display: none;
+ }
+ .select-report label:after{
+     content: "*";
+     margin-right: 10px;
+ }
+
+
+ .select-css {
+     padding: 10px;
+     color: #444;
+     border: 1px solid #aaa;
+     box-shadow: 2px 1px 0 1px rgba(0,0,0,.04);
+     border-radius: 5px;
+
+ }
+
+ .select-css option {
+    background: #aaaaaa;
+ }
+
+ .home-form-date {
+     padding: 20px;
+     color: #444;
+ }
+
+ #date-fieldset {
+     padding: 30px;
+ }
+
+ #periodicity{
+     padding: 30px;
+ }
+
+ .home-form-control ul {
+     list-style: none;
+ }
+
+ .home-form-control ul li {
+     padding: 5px;
+ }
+
+.home-form-control ul li input {
+    display: inline-block;
+    padding: 0 5px;
+
+}
+
+ .flex-group {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .group-item {
+     width: 30%;
+     text-align: left;
+ }
+ .home-period-fieldset {
+     margin: 10px 0;
+ }
+
+ .home-date-select {
+     margin: 30px 0;
+
+ }
+
+ #dateTime {
+     padding: 30px;
+ }
+
+ .flex-group-date {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 0 30px;
+ }
+
+ legend {
+     font-weight: bold;
+ }
+ legend:after {
+     content: "*";
+     font-weight: bold;
+ }
+
+ fieldset {
+     border-radius: 10px;
+     border-color: #ccc;
+ }
+ .generateReport-btn {
+     text-align: center;
+ }
+
+ #generateReport-btn {
+     width: 200px;
+     padding: 10px 15px;
+     font-weight: bold;
+     color: #0c2131;
+     border-radius: 5px;
+     box-shadow: 2px 4px 2px 2px #0c2131;
+     font-size: 18px;
+ }
+
+ #generateReport-btn:hover{
+     background: #0c2131;
+     color: white;
+ }
+
+ #generateReport-btn:active{
+     background: transparent;
+ }
+
+ .main-report-container {
+     display: flex;
+     justify-content: space-between;
+     align-items: start;
+     padding: 40px;
+ }
+
+
+ .table-container {
+     width: 40%;
+
+
+ }
+
+ .report-chart-container{
+     width: 55%;
+     text-align: center;
+
+ }
+
+
+
+ .table-container h3 {
+     text-align: center;
+ }
+
+ .report-chart-container {
+     margin: 50px 0;
+ }
+
+ #generateChart{
+     width: 200px;
+     padding: 10px 15px;
+     font-weight: bold;
+     color: #0c2131;
+     border-radius: 5px;
+     box-shadow: 2px 4px 2px 2px #0c2131;
+     font-size: 18px;
+     text-align: center;
+ }
+
+ #generateChart:hover{
+     background: #0c2131;
+     color: white;
+ }
+
+ #generateChart:active{
+     background: transparent;
+ }
+
+ .error {
+
+     color: #b53535;
+     font-weight: bold;
+     display: none;
+
+ }
+
+ .charts {
+     margin-top: 30px;
+ }
+
+
+
+

@@ -1,0 +1,34 @@
+<div class="main-report-container">
+    <div class="table-container">
+        <h3>{{counter}}</h3>
+        <table class="table table-sm table-striped table-bordered" id="dataTable">
+            <thead>
+            <th>Date</th>
+            <th>Values</th>
+            </thead>
+            <tbody>
+            {{#if dataSet}}
+                {{#each dataSet}}
+                    <tr>
+                        <td>{{formatDate my_date}}</td>
+                        <td>{{value}}</td>
+                    </tr>
+                {{/each}}
+            {{/if}}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="report-chart-container">
+        <div class="generate-chart-btn-container">
+            <button id="generateChart"
+                    data-tableName="{{tableName}}" data-start_date="{{start_date}}"
+                    data-end_date="{{end_date}}" data-reporttype="{{period}}" data-reportname="{{reportname}}">Click to Generate Charts</button>
+        </div>
+        <div class="charts">
+            <canvas id="canvas" >
+
+            </canvas>
+        </div>
+    </div>
+</div>
