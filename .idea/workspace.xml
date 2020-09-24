@@ -4,7 +4,9 @@
     <list default="true" id="e694b5f1-142a-4745-b46b-f58a433f2a86" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.env" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/home.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/report.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/report.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,12 +70,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600847703991</updated>
-      <workItem from="1600847705069" duration="37756000" />
+      <workItem from="1600847705069" duration="40378000" />
     </task>
+    <task id="LOCAL-00001" summary="Changes to Host">
+      <created>1600935422931</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1600935422931</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changes to Host" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to Host" />
   </component>
   <component name="WindowStateProjectService">
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600932268354">
@@ -84,6 +98,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="457" y="237" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper/0.0.1440.900@0.0.1440.900" timestamp="1600849036695" />
+    <state x="278" y="25" key="CommitChangelistDialog2" timestamp="1600935422770">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="278" y="25" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1600935422770" />
     <state x="574" y="354" key="Github.ShareDialog" timestamp="1600933819420">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -112,5 +130,9 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1600906878420" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1600935427552">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1600935427552" />
   </component>
 </project>

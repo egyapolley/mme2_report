@@ -48,7 +48,8 @@ const handlebars = exphbs.create({
     partialsDir: path.join(__dirname, "views", "partials"),
     helpers: {
         formatDate: function (date) {
-            return date.substring(0, 4) + "/" + date.substring(4, 6) + "/" + date.substring(6, 8) + ":" + date.substring(8)
+            let newstr = date.substring(0, 4) + "/" + date.substring(4, 6) + "/" + date.substring(6, 8) + ":" + date.substring(8);
+            return newstr.replace(/[:\\/]*$/i, "");
 
         }
     }
@@ -77,13 +78,34 @@ app.post("/report", (req, res) => {
     let tableName = "mme2_KPI." + pm_counter;
     let start_date = beginDate.replace("T", " ") + ":00";
     let end_date = endDate.replace("T", " ") + ":00";
-    let query = `select date_format( timeInserted, '%Y%m%d%H' ) as my_date, sum(counterValue_1)
-    as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+
+    let query = "";
+    switch (period) {
+        case "hourly":
+            query = `select date_format( timeInserted, '%Y%m%d%H' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "daily":
+            query = `select date_format( timeInserted, '%Y%m%d' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "weekly":
+            query = `select date_format( timeInserted, '%x%v' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "monthly":
+            query = `select date_format( timeInserted, '%Y%m' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "yearly":
+            query = `select date_format( timeInserted, '%Y' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        default:
+            query = `select date_format( timeInserted, '%Y' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+
+    }
     dbcon.execute(query, [start_date, end_date], function (error, rows, fields) {
         if (error) throw error;
         let dataSet = rows;
         let counter = Report[pm_counter];
         let reportname = counter;
+        let periodicity =period.charAt(0).toUpperCase()+period.substring(1);
         res.render("report", {
             dataSet,
             counter,
@@ -92,7 +114,8 @@ app.post("/report", (req, res) => {
             end_date,
             tableName,
             period,
-            reportname
+            reportname,
+            periodicity
         })
 
     })
@@ -103,8 +126,27 @@ app.post("/charts", (req, res) => {
     let start_date = req.body.start_date
     let end_date = req.body.end_date
     let period = req.body.period;
-    let query = `select date_format( timeInserted, '%Y%m%d%H' ) as my_date, sum(counterValue_1)
-    as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+    let query = "";
+    switch (period) {
+        case "hourly":
+            query = `select date_format( timeInserted, '%Y%m%d%H' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "daily":
+            query = `select date_format( timeInserted, '%Y%m%d' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "weekly":
+            query = `select date_format( timeInserted, '%x%v' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "monthly":
+            query = `select date_format( timeInserted, '%Y%m' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        case "yearly":
+            query = `select date_format( timeInserted, '%Y' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+            break;
+        default:
+            query = `select date_format( timeInserted, '%Y' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
+
+    }
     dbcon.execute(query, [start_date, end_date], function (error, rows, fields) {
         if (error) throw error;
         res.json(rows);

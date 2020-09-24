@@ -9,7 +9,7 @@ $(function (){
         let completedDate = new Date(endDate.value);
         console.log(startDate, completedDate);
 
-        if (startDate > completedDate) {
+        if (startDate >= completedDate) {
             small.style.display = "inline";
             event.preventDefault()
 
