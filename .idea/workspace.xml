@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e694b5f1-142a-4745-b46b-f58a433f2a86" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/report.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/report.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1600847703991</updated>
       <workItem from="1600847705069" duration="50618000" />
-      <workItem from="1601037968217" duration="1024000" />
+      <workItem from="1601037968217" duration="1472000" />
     </task>
     <task id="LOCAL-00001" summary="Changes to Host">
       <created>1600935422931</created>
@@ -92,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600986394280</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added the welcome title to login">
+      <created>1601044425253</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1601044425253</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,7 +110,8 @@
     <MESSAGE value="Changes to Host" />
     <MESSAGE value="Added other queries" />
     <MESSAGE value="Included the file export function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Included the file export function" />
+    <MESSAGE value="Added the welcome title to login" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the welcome title to login" />
   </component>
   <component name="WindowStateProjectService">
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600932268354">
@@ -115,10 +122,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="457" y="237" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper/0.0.1440.900@0.0.1440.900" timestamp="1600849036695" />
-    <state x="278" y="25" key="CommitChangelistDialog2" timestamp="1600986394128">
+    <state x="278" y="25" key="CommitChangelistDialog2" timestamp="1601044425114">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="278" y="25" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1600986394128" />
+    <state x="278" y="25" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1601044425114" />
     <state x="574" y="354" key="Github.ShareDialog" timestamp="1600933819420">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -147,9 +154,9 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1600906878420" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1600986395755">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1601044427197">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1600986395755" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1601044427197" />
   </component>
 </project>
