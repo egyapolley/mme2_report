@@ -1,13 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+
  body {
      font-family: sans-serif;
      background: #03a9f48c;
 }
+
+
+ .header {
+     font-family: 'PT Serif', serif;
+     padding: 70px 50px 50px;
+     text-align: center;
+     color: white;
+ }
+
+ .header h1 {
+     text-shadow: 2px 2px 2px #ccc;
+ }
 
  .login-main-container {
      width: 300px;
@@ -21,17 +36,7 @@
 
 
 
- .login-container h1 {
-     font-size: 40px;
-     border-bottom: 6px solid #0c2131;
-     float: left;
-     display: none;
-     margin-bottom: 15px;
-     padding: 5px 0;
- }
- .clearfix {
-     clear: both;
- }
+
 
  .textbox {
      width: 100%;
