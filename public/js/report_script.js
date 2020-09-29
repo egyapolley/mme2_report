@@ -64,7 +64,6 @@ $(function () {
         let period =$(dataBtn).data("reporttype");
         let reportname = $(dataBtn).data("reportname");
 
-        console.log(tablename,start_date,end_date,period,reportname);
 
         $.post("/csv", {tablename, start_date, end_date, period,reportname})
             .done(function (data) {

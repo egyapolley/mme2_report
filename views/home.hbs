@@ -1,4 +1,40 @@
-<div class="home-main-container">
+<div class="home-main-container" >
+    <div class="change-password-overlay" id="change-password-overlay">
+        <div class="change-password-form-container" >
+            <div class="message_error_passwd" id="message_error_passwd">
+                <span id="error_messsge_passwd"></span>
+            </div>
+            <form action="/changepasswd" method="post" id="changePasswd-form">
+
+                <div class="form-control-changePass">
+                    <label for="oldpass">Old Password</label>
+                    <input type="password" name="oldpass" id="oldpass" required>
+                    <i class="far fa-eye" id="togglePassword"></i>
+                </div>
+                <div class="form-control-changePass">
+                    <label for="newpass1">New Password</label>
+                    <input type="password" name="newpass1" id="newpass1" required>
+                </div>
+                <div class="form-control-changePass">
+                    <label for="newpass2">Confirm New Password</label>
+                    <input type="password" name="newpass2" id="newpass2" required>
+                </div>
+                <div class="form-control-changePass-btn">
+                    <button id="change-pass-btn" type="submit">Submit</button>
+                    <button id="cancel-change-pass-btn" type="button">Cancel</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    <div class="home-change-passwd">
+        <ul>
+            <li><button id="change-Passwd-btn">Change password</button></li>
+            <li><a href="/logout"><i class="fas fa-sign-out-alt" id="logout-btn"></i>Logout</a></li>
+        </ul>
+    </div>
+    <div class="clearfix"></div>
     <div class="home-form-container">
         <form action="/report" id="report-form" method="post">
         <div class="home-form-control select-report">

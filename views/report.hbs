@@ -1,37 +1,46 @@
-<div class="main-report-container">
-    <div class="table-container">
-        <h3>{{counter}}&nbsp;({{periodicity}})</h3>
-        <table class="table table-sm table-striped table-bordered" id="dataTable">
-            <thead>
-            <th>Date</th>
-            <th>Values</th>
-            </thead>
-            <tbody>
-            {{#if dataSet}}
-                {{#each dataSet}}
-                    <tr>
-                        <td>{{formatDate my_date}}</td>
-                        <td>{{value}}</td>
-                    </tr>
-                {{/each}}
-            {{/if}}
+<div class="report-body-container">
 
-            </tbody>
-        </table>
+
+
+    <div class="report-logout">
+        <a href="/logout" id="logout-btn"><i class="fas fa-sign-out-alt"></i>Logout</a>
     </div>
-    <div class="report-chart-container">
-        <div class="generate-chart-btn-container">
+    <div class="clearfix"></div>
+    <div class="main-report-container">
+        <div class="table-container">
+            <h3>{{counter}}&nbsp;({{periodicity}})</h3>
+            <table class="table table-sm table-striped table-bordered" id="dataTable">
+                <thead>
+                <th>Date</th>
+                <th>Values</th>
+                </thead>
+                <tbody>
+                {{#if dataSet}}
+                    {{#each dataSet}}
+                        <tr>
+                            <td>{{formatDate my_date}}</td>
+                            <td>{{value}}</td>
+                        </tr>
+                    {{/each}}
+                {{/if}}
 
-            <button id="downloadcsv"><i class="fas fa-file-csv fa-2x"></i>&nbsp;&nbsp;Export csv</button>
-
-            <button id="generateChart"
-                    data-tableName="{{tableName}}" data-start_date="{{start_date}}"
-                    data-end_date="{{end_date}}" data-reporttype="{{period}}" data-reportname="{{reportname}}">Click to Generate Charts</button>
+                </tbody>
+            </table>
         </div>
-        <div class="charts">
-            <canvas id="canvas" >
+        <div class="report-chart-container">
+            <div class="generate-chart-btn-container">
 
-            </canvas>
+                <button id="downloadcsv"><i class="fas fa-file-csv fa-2x"></i>&nbsp;&nbsp;Export csv</button>
+
+                <button id="generateChart"
+                        data-tableName="{{tableName}}" data-start_date="{{start_date}}"
+                        data-end_date="{{end_date}}" data-reporttype="{{period}}" data-reportname="{{reportname}}">Click to Generate Charts</button>
+            </div>
+            <div class="charts">
+                <canvas id="canvas" >
+
+                </canvas>
+            </div>
         </div>
     </div>
 </div>

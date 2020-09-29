@@ -1,11 +1,21 @@
 const express = require("express"),
     session = require('express-session'),
+    MongoStore = require("connect-mongo")(session),
     path = require("path"),
     dbcon = require("./mysql"),
     fs = require("fs"),
     moment = require("moment"),
     Parser = require("json2csv").Parser,
-    exphbs = require("express-handlebars");
+    mongoose = require("mongoose"),
+    bcrypt = require("bcrypt"),
+    passport =require("passport"),
+    initializePassport = require("./passport-config"),
+    exphbs = require("express-handlebars"),
+    flash = require("connect-flash"),
+    sendMail = require("./send_mail"),
+    uuid = require("uuid"),
+    UserUUID = require("./models/userUUID"),
+    User = require("./models/user");
 
 
 const Report = {
@@ -17,26 +27,61 @@ const Report = {
     NbrFailedAttachRequests_EPSandNonEPSnotAllowed: "VS_UE_attach_fail_rej_EPSandNonEPSnotAllowed",
     NbrFailedAttachRequests_CannotDeriveUEid: "VS_UE_attach_fail_rej_UEidCannotBeDerived",
     NbrFailedAttachRequests_NetworkFailure: "VS_UE_attach_fail_rej_NetworkFailure",
-}
+    NbrPageRespInLastSeenTA:"VS_paging_all_rsp_ENBinLastTA",
+    NbrPageRespNotInLastSeenTA:"VS_paging_all_rsp_ENBNotinLastTA",
+    NbrPagingFailures_Timeout:"VS_paging_all_fail_OnMaxRetry",
+    AttPaging_FirstAttempt:"VS_paging_all_req_1stTry",
+    NbrSuccessTAU:"VS_UE_TAU_all_succ",
+    TauInterMmeSucc:"VS_UE_TAU_IrMME_all_succ",
+    AttTAU:"VS_UE_TAU_all_req",
+    TauInterMmeAtt:"VS_UE_TAU_IrMME_all_req"
 
+};
 
 require("dotenv").config({
     path: path.join(__dirname, "config", "config.env")
 });
 
-let PORT = process.env.PORT || 5000;
+mongoose.connect("mongodb://localhost/mme2_report", {
 
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+}).then(() =>{
+    console.log("Mongo DB connected")
+}).catch(err =>{
+    console.log("Cannot connect to MongoDB");
+    throw err;
+});
 
 const app = express();
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({
         extended: false
     })
-)
+);
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    store:new MongoStore({
+        mongooseConnection:mongoose.connection
+    })
+}));
+
+app.use(flash())
+
+initializePassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 let HOST = process.env.PROD_HOST;
 
+let PORT = process.env.PORT||5000;
 
 if (process.env.NODE_ENV === "development") {
     app.use(require("morgan")("tiny"));
@@ -68,15 +113,119 @@ app.get("/", (req, res) => {
     res.render("login");
 });
 
-app.get("/home", (req, res) => {
-    res.render("home")
-})
+app.get("/logout", checkAuthenticated,(req, res) => {
+    req.logout();
+    res.redirect("/login");
 
-app.post("/login", (req, res) => {
+});
+
+
+app.get("/login", (req, res) => {
+    res.render("login",{error:req.flash("error")});
+});
+
+app.post("/changepasswd",checkAuthenticated, async (req, res) => {
+    const {oldpass, newpass1, newpass2} = req.body;
+    if (oldpass && newpass1 && newpass2) {
+            try {
+                let user = await User.findOne({email: req.user.email});
+                let isValid = await bcrypt.compare(oldpass, user.password);
+                if (isValid){
+                    user.password = await bcrypt.hash(newpass2, (await bcrypt.genSalt(10)));
+                    await user.save();
+                    req.logOut();
+                    return res.redirect("/login")
+                }
+               return res.render("home",{error:"Incorrect Password"})
+
+            } catch (e) {
+                return  res.redirect("/home")
+            }
+
+        }
     res.redirect("/home");
+
+});
+
+app.get("/forget_passwd", (req, res) => {
+    res.render("forget_pass",{layout:"forget_passwd"});
 })
 
-app.post("/report", (req, res) => {
+
+app.post("/forget_passwd",async (req, res) => {
+    const {email} = req.body;
+    console.log(email);
+    if (email){
+       const user = await User.findOne({email});
+       if (user){
+           let first_name=user.first_name;
+           let to_email = user.email;
+           let id = uuid.v4();
+           let useruuid = new UserUUID({
+               email:to_email,
+               uuid:id,
+           });
+           useruuid = await useruuid.save();
+           if (useruuid){
+               let url_link = `http://localhost:3000/reset/${id}`;
+               return sendMail(first_name,to_email, url_link, res);
+           }
+       }
+       return  res.json({error:"error"});
+    }
+
+    res.json({error:"error"});
+
+});
+
+app.get("/reset/:uuid", async (req, res) => {
+    let uuid = req.params.uuid;
+    if (uuid){
+        let useruid = await UserUUID.findOne({uuid:uuid});
+        if (useruid){
+            return res.render("reset_passwd", {id:uuid, layout:"reset_passwd_layout"});
+        }
+    }
+    res.render("404_error");
+
+});
+
+app.post("/reset", async (req, res) => {
+    let {uuid, newpass2} = req.body;
+    if (uuid){
+       let userUuid =  await UserUUID.findOne({uuid:uuid});
+       if (userUuid){
+          let user =  await User.findOne({email:userUuid.email});
+          if (user){
+             let hashpasswd =  await  bcrypt.hash(newpass2, await bcrypt.genSalt(10));
+             user.password = hashpasswd;
+             user = await user.save();
+             if (user){
+                 await UserUUID.deleteOne({uuid:uuid});
+                 return res.json({success:"success"});
+             }
+
+          }
+       }
+        return res.json({error:"error"});
+    }else {
+        return res.json({error:"error"});
+
+
+    }
+
+})
+app.get("/home", checkAuthenticated, (req, res) => {
+    res.render("home")
+});
+
+app.post("/login", passport.authenticate("local",{
+    successRedirect:"/home",
+    failureRedirect:"/login",
+    failureFlash:true
+}));
+
+app.post("/report",checkAuthenticated, (req, res) => {
     const {beginDate, endDate, pm_counter, period} = req.body;
     let tableName = "mme2_KPI." + pm_counter;
     let start_date = beginDate.replace("T", " ") + ":00";
@@ -124,7 +273,7 @@ app.post("/report", (req, res) => {
     })
 });
 
-app.post("/charts", (req, res) => {
+app.post("/charts",checkAuthenticated, (req, res) => {
     let tableName = req.body.tablename
     let start_date = req.body.start_date
     let end_date = req.body.end_date
@@ -157,7 +306,7 @@ app.post("/charts", (req, res) => {
 
 });
 
-app.post("/csv", (req, res) => {
+app.post("/csv",checkAuthenticated, (req, res) => {
 
     let {tablename, start_date, end_date, period, reportname} = req.body;
     let tableName = tablename;
@@ -201,7 +350,7 @@ app.post("/csv", (req, res) => {
 
 });
 
-app.get("/csv", (req, res) => {
+app.get("/csv",checkAuthenticated, (req, res) => {
     let fileName = req.query.fileName
     let filepath = path.join(__dirname, "tmp", fileName);
     res.download(filepath, fileName, err => {
@@ -212,13 +361,54 @@ app.get("/csv", (req, res) => {
         })
 
     })
-})
+});
 
-console.log(process.env.PROD_HOST)
+app.post("/admin/create",  async (req, res) => {
+    const {username, email, password,first_name, last_name} = req.body;
+    if (username && email && password) {
+        let user = await User.findOne({email:email});
+        if (!user){
+           let salt = await bcrypt.genSalt(10);
+           let hashpassword =await  bcrypt.hash(password, salt);
+            user = new User({
+                username,
+                email,
+                first_name,
+                last_name,
+                password:hashpassword
+            });
+
+            await user.save();
+            console.log(user);
+            res.send("Acct created");
+
+        }
+    }
+
+});
+
+app.get("/admin/create",(req, res) => {
+    res.render("createAcct");
+});
+
+
+app.use(function (req, res){
+    res.status(400).render("404_error");
+});
+
 
 app.listen(PORT, HOST, () => {
     console.log(`Server running in ${process.env.NODE_ENV} at endpoint http://${HOST}:${PORT}`);
-})
+});
+
+
+function checkAuthenticated(req, res, next){
+    if (req.isAuthenticated()){
+        return  next();
+    }else {
+        res.redirect("/login");
+    }
+}
 
 
 

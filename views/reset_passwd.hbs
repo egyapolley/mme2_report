@@ -1,0 +1,29 @@
+<div class="change-password-form-container">
+
+    <div id="reset-pass-group-1">
+        <h3><i class="fas fa-check-circle"></i>&nbsp;Password updated successfully</h3>
+        <a href="/login"><i class="fas fa-sign-in-alt"></i>&nbsp;Click to Login</a>
+    </div>
+
+    <div id="reset-pass-group-2">
+        <h3 style="text-align: center;margin-bottom: 20px">Password Reset</h3>
+        <div class="message_error_passwd" id="message_error_passwd">
+            <span id="error_messsge_passwd"></span>
+        </div>
+        <form action="/resetpasswd" method="post" id="resetPasswd-form">
+            <div class="form-control-changePass">
+                <label for="newpass1">New Password</label>
+                <input type="password" name="newpass1" id="newpass1" required>
+            </div>
+            <div class="form-control-changePass">
+                <label for="newpass2">Confirm New Password</label>
+                <input type="password" name="newpass2" id="newpass2" required>
+            </div>
+            <div class="form-control-changePass-btn">
+                <button id="reset-submit-pass-btn" type="submit" data-id="{{id}}">Submit</button>
+                <button id="reset-cancel-pass-btn" type="button">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</div>

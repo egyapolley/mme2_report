@@ -2,22 +2,32 @@
     <h1>MME2 PM REPORT PORTAL</h1>
 </div>
 
+
+
 <div class="login-main-container">
+    {{#if error}}
+        <div class="message_error">
+            <span><i class="fas fa-exclamation-triangle"></i>&nbsp;{{error}}</span>
+        </div>
+
+
+    {{/if}}
     <div class="login-container">
         <div class="form">
             <form action="/login" method="post">
                 <div class="login-form-control textbox">
                     <i class="fas fa-user"></i>
-                    <input type="text" name="username" placeholder="Username" id="username">
+                    <input type="text" name="username" placeholder="Username" id="username" required>
                 </div>
                 <div class="login-form-control textbox">
                     <i class="fas fa-lock"></i>
-                    <input type="password" name="password" placeholder="Password" id="password">
+                    <input type="password" name="password" placeholder="Password" id="password" required>
                 </div>
 
                 <div class="login-form-control">
                     <input type="submit" class="login-btn" value="Login">
                 </div>
+                <a href="/forget_passwd" class="login-forgot-password">Forgot Password</a>
             </form>
         </div>
     </div>
