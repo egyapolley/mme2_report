@@ -38,6 +38,8 @@ const Report = {
 
 };
 
+
+
 require("dotenv").config({
     path: path.join(__dirname, "config", "config.env")
 });
@@ -233,6 +235,9 @@ app.post("/report",checkAuthenticated, (req, res) => {
 
     let query = "";
     switch (period) {
+        case "15mins":
+            query = `select   date_format(timeInserted,'%Y%m%d%H%i%s') as my_date, counterValue_1 as value from ${tableName} order by  my_date desc`;
+            break;
         case "hourly":
             query = `select date_format( timeInserted, '%Y%m%d%H' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
             break;
@@ -279,7 +284,11 @@ app.post("/charts",checkAuthenticated, (req, res) => {
     let end_date = req.body.end_date
     let period = req.body.period;
     let query = "";
+
     switch (period) {
+        case "15mins":
+            query = `select   date_format(timeInserted,'%Y%m%d%H%i%s') as my_date, counterValue_1 as value from ${tableName} order by  my_date desc`;
+            break;
         case "hourly":
             query = `select date_format( timeInserted, '%Y%m%d%H' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
             break;
@@ -312,6 +321,9 @@ app.post("/csv",checkAuthenticated, (req, res) => {
     let tableName = tablename;
     let query = "";
     switch (period) {
+        case "15mins":
+            query = `select   date_format(timeInserted,'%Y%m%d%H%i%s') as my_date, counterValue_1 as value from ${tableName} order by  my_date desc`;
+            break;
         case "hourly":
             query = `select date_format( timeInserted, '%Y%m%d%H' ) as my_date, sum(counterValue_1)as value from ${tableName} where timeInserted between ? and ? group by my_date order by my_date desc`;
             break;
