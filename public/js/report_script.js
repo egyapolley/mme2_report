@@ -1,5 +1,9 @@
 $(function () {
 
+    const charts_container = document.getElementById("charts");
+
+
+
     function renderChar(data, labels,reportname){
         let ctx = document.getElementById("canvas").getContext("2d");
         const mycharts = new Chart(ctx, {
@@ -43,6 +47,7 @@ $(function () {
                         labels.push(data[i].my_date);
                         dataSet.push(data[i].value);
                     }
+                    charts_container.style.display="block";
 
                     renderChar(dataSet,labels, reportname);
 

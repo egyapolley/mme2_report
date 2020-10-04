@@ -9,7 +9,7 @@
     <div class="main-report-container">
         <div class="table-container">
             <h3>{{counter}}&nbsp;({{periodicity}})</h3>
-            <table class="table table-sm table-striped table-bordered" id="dataTable">
+            <table class="table table-sm table-striped table-bordered content-table" id="dataTable">
                 <thead>
                 <th>Date</th>
                 <th>Values</th>
@@ -34,9 +34,9 @@
 
                 <button id="generateChart"
                         data-tableName="{{tableName}}" data-start_date="{{start_date}}"
-                        data-end_date="{{end_date}}" data-reporttype="{{period}}" data-reportname="{{reportname}}">Click to Generate Charts</button>
+                        data-end_date="{{end_date}}" data-reporttype="{{period}}" data-reportname="{{reportname}}">Generate Charts &nbsp;<i class="fas fa-chart-line"></i></button>
             </div>
-            <div class="charts">
+            <div class="charts" id="charts">
                 <canvas id="canvas" >
 
                 </canvas>

@@ -256,11 +256,11 @@
  #generateChart{
      width: 200px;
      padding: 10px 15px;
-     font-weight: bold;
+     /*font-weight: bold;*/
      color: #0c2131;
      border-radius: 5px;
      box-shadow: 2px 4px 2px 2px #0c2131;
-     font-size: 18px;
+     font-size: 16px;
      text-align: center;
  }
 
@@ -282,16 +282,23 @@
  }
 
  .charts {
-     margin-top: 30px;
+     margin-top: 40px;
+     padding: 10px;
  }
 
  #downloadcsv {
-     position: absolute;
+/*     position: absolute;
      top: 0;
-     left: 0;
+     left: 0;*/
      padding: 10px;
      border-radius: 5px;
      box-shadow: 2px 4px 2px 2px #0c2131;
+
+ }
+
+ .generate-chart-btn-container {
+     display: flex;
+     justify-content: space-evenly;
 
  }
 
@@ -555,6 +562,48 @@
     font-family: 'PT Serif', serif;
 
 
+}
+.table-container {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 5px black;
+}
+
+.table-container h3 {
+    padding: 10px 0 0 0;
+
+
+}
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    text-align: left;
+}
+
+.content-table thead tr {
+    background: #008000;
+    color: white;
+    font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+    padding: 10px;
+    border: 1px solid #645d5d;
+}
+
+.content-table tr:nth-of-type(even){
+    background: #efecec;
+}
+
+.charts {
+    background: #fff;
+    color: #0a0303;
+    display: none;
+    border: 1px solid #f4f4f4;
+    box-shadow: 1px 1px 5px #ccc;
 }
 
 
