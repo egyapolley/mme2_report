@@ -263,7 +263,20 @@ app.post("/report",checkAuthenticated, (req, res) => {
         let counter = Report[pm_counter];
         let reportname = counter;
         let periodicity = period.charAt(0).toUpperCase() + period.substring(1);
-        res.render("report", {
+        req.session.reportdata = {
+            dataSet,
+            counter,
+            start_date,
+            end_date,
+            tableName,
+            period,
+            reportname,
+            periodicity
+
+        }
+
+
+/*        res.render("report", {
             dataSet,
             counter,
             layout: "report_layout",
@@ -273,10 +286,44 @@ app.post("/report",checkAuthenticated, (req, res) => {
             period,
             reportname,
             periodicity
-        })
+        })*/
+
+        res.redirect(303,"/report")
 
     })
 });
+
+app.get("/report",checkAuthenticated, (req, res) => {
+    if (req.session.reportdata){
+        let {
+            dataSet,
+            counter,
+            start_date,
+            end_date,
+            tableName,
+            period,
+            reportname,
+            periodicity
+
+        } = req.session.reportdata;
+        return res.render("report",{
+            dataSet,
+            counter,
+            start_date,
+            end_date,
+            tableName,
+            period,
+            reportname,
+            periodicity,
+            layout: "report_layout",
+        })
+
+    }
+
+    res.redirect("/home")
+
+
+})
 
 app.post("/charts",checkAuthenticated, (req, res) => {
     let tableName = req.body.tablename
