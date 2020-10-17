@@ -50,12 +50,29 @@
                 <option value="NbrFailedAttachRequests_NetworkFailure">VS_UE_attach_fail_rej_NetworkFailure</option>
                 <option value="NbrPageRespInLastSeenTA">VS_paging_all_rsp_ENBinLastTA</option>
                 <option value="NbrPageRespNotInLastSeenTA">VS_paging_all_rsp_ENBNotinLastTA</option>
-                <option value=NbrPagingFailures_Timeout"">VS_paging_all_fail_OnMaxRetry</option>
+                <option value="NbrPagingFailures_Timeout">VS_paging_all_fail_OnMaxRetry</option>
                 <option value="AttPaging_FirstAttempt">VS_paging_all_req_1stTry</option>
                 <option value="NbrSuccessTAU">VS_UE_TAU_all_succ</option>
                 <option value="TauInterMmeSucc">VS_UE_TAU_IrMME_all_succ</option>
                 <option value="AttTAU">VS_UE_TAU_all_req</option>
                 <option value="TauInterMmeAtt">VS_UE_TAU_IrMME_all_req</option>
+                <option value="VS_UE_attach_succ_rate_SFL">VS_UE_attach_succ_rate_SFL</option>
+                <option value="VS_paging_all_rsp_copy_1">VS_paging_all_rsp_rate_copy_1</option>
+                <option value="VS_paging_all_rsp">VS_paging_all_rsp</option>
+                <option value="VS_UE_TAU_IaMME_all_succ_rate">VS_UE_TAU_IaMME_all_succ_rate</option>
+                <option value="VS_UE_TAU_IaMME_all_succ">VS_UE_TAU_IaMME_all_succ</option>
+                <option value="VS_UE_TAU_IaMME_all_req">VS_UE_TAU_IaMME_all_req</option>
+                <option value="UECapacityUsage">MAF Capacity</option>
+                <option value="AveNumOfDefaultBearers">Avg Number_Default_Bearers</option>
+                <option value="MaxNumOfDefaultBearers">Max Number_Default_Bearers</option>
+                <option value="AveNumOfDedicatedBearers">Avg Number_Dedicated_Bearers</option>
+                <option value="MaxNumOfDedicatedBearers">Max Number_Dedicated_Bearers</option>
+                <option value="AveNbrOfRegisteredUE">Avg Number_Registered_UEs</option>
+                <option value="MaxNbrOfRegisteredUE">Max Number_Registered_UEs</option>
+                <option value="AveNbrOfIdleUE">Max Number_Idle_UEs</option>
+                <option value="MaxNbrOfIdleUE">Avg Number_Idle_UEs</option>
+                <option value="AveConnectedUE">Max Number_Connected_UEs</option>
+                <option value="MaxConnectedUE">Avg Number_Connected_UEs</option>
             </select>
         </div>
             <div class="home-form-date">
@@ -118,6 +135,18 @@
                                     </div>
                                 </div>
 
+                                <script>
+                                    (function() {
+                                        const begindate_el = document.getElementById("beginDate");
+                                        const end_date_el =document.getElementById("endDate");
+                                        if (begindate_el.type === "text"){
+                                            begindate_el.type = "date";
+                                            end_date_el.type ="date";
+                                        }
+
+                                    })();
+                                </script>
+
                             </fieldset>
 
                         </div>
@@ -128,7 +157,8 @@
 
             </div>
             <div class="generateReport-btn">
-                <input type="submit" value="Generate Report" id="generateReport-btn">
+<!--                <input type="submit" value="Generate Report" id="generateReport-btn">-->
+                <button type="submit" id="generateReport-btn">Generate Report</button>
             </div>
         </form>
 

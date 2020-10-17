@@ -65,10 +65,6 @@
      margin: 0 10px;
  }
 
-.textbox input[placeholder]{
-    font-family: 'PT Serif', serif;
-    font-weight: bold;
-}
 
  .login-btn {
      width: 100%;
@@ -81,11 +77,14 @@
      border-radius: 5px;
      font-weight: bold;
      font-family: 'PT Serif', serif;
+     cursor: pointer;
+     outline: none;
  }
 
  .login-btn:hover {
      color: #0c2131;
      background: white;
+     box-shadow: 0 2px 2px 2px #0c2131;
  }
 
  .login-btn:active{
@@ -123,10 +122,12 @@
      box-shadow: 2px 1px 0 1px rgba(0,0,0,.04);
      border-radius: 5px;
 
+
  }
 
  .select-css option {
     background: #aaaaaa;
+     line-height: 3;
  }
 
  .home-form-date {
@@ -208,14 +209,16 @@
      font-weight: bold;
      color: #0c2131;
      border-radius: 5px;
-     box-shadow: 2px 4px 2px 2px #0c2131;
      font-size: 18px;
      font-family: 'PT Serif', serif;
+     cursor: pointer;
+     outline: none;
  }
 
  #generateReport-btn:hover{
      background: #0c2131;
      color: white;
+     box-shadow: 2px 4px 2px 2px #0c2131;
  }
 
  #generateReport-btn:active{
@@ -262,6 +265,8 @@
      box-shadow: 2px 4px 2px 2px #0c2131;
      font-size: 16px;
      text-align: center;
+     outline: none;
+     cursor: pointer;
  }
 
  #generateChart:hover{
@@ -293,6 +298,7 @@
      padding: 10px;
      border-radius: 5px;
      box-shadow: 2px 4px 2px 2px #0c2131;
+     cursor: pointer;
 
  }
 
@@ -380,6 +386,7 @@
      text-decoration: none;
      color: #0c2131a1;
      font-weight: bold;
+     cursor: pointer;
 
  }
 
