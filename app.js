@@ -191,7 +191,7 @@ app.post("/forget_passwd", async (req, res) => {
             });
             useruuid = await useruuid.save();
             if (useruuid) {
-                let url_link = `http://localhost:3000/reset/${id}`;
+                let url_link = `http://${HOST}:${PORT}/reset/${id}`;
                 return sendMail(first_name, to_email, url_link, res);
             }
         }
